@@ -1,369 +1,254 @@
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makers Ia</title>
-    <link rel="stylesheet" href="index.css">
-   
-
-</head>
-
-<body>
+    <title>Chatbot ConfiguroWeb</title>
+    <!-- Se mantiene la importación de la fuente y los iconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .Maps {
-            position: relative;
-            width: 600px;
-            height: 500px;
-            background: #fff;
+        /* Estilos CSS con temática tecnológica */
+        :root {
+            --color-bg-dark: #0f172a;
+            --color-bg-light: #1e293b;
+            --color-accent-blue: #00bcd4;
+            --color-accent-magenta: #ff00ff;
+            --color-text-light: #e2e8f0;
+            --color-text-dark: #cbd5e1;
+            /* Se eliminan las variables de brillo para un efecto más sutil */
         }
-
-        .Maps iframe {
-            width: 100%;
-            height: 100%;
-        }
-
-        .caja#rayita {
-            text-align: center;
-        }
-
-        .icons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            list-style: none;
-            padding: 0;
-        }
-
-        .icons li {
-            margin: 0 10px;
-            /* Espaciado entre los íconos */
-        }
-
-        .icons img {
-            width: 30px;
-            height: auto;
-            transition: filter 0.3s ease;
-            /* Agregamos una transición al filtro */
-        }
-
-        .icons a:hover img {
-            filter: invert(1);
-            /* Cambiamos el color al hacer hover */
-        }
-
-
-        .grupo-1 {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-
-
-        body {
-
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        section#inicio {
-            position: relative;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        #content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-
-
-
-
-        video {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-        }
-
-        img {
-            width: 27%;
-            height: auto;
-            float: right;
-            shape-outside: rectangle(0, 0, 0, 100%);
-        }
-
-        /* Importing Google font - Open Sans */
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
-
         * {
-
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
-
-        .card-list {
+        html, body {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            max-width: 1250px;
-            margin: 100px auto;
-            padding: 20px;
-            gap: 20px;
+            height: 100%;
+            place-items: center;
+            background: var(--color-bg-dark);
         }
-
-        .card-list .card-item {
-            background: #fff;
-            padding: 26px;
-            border-radius: 8px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.04);
-            list-style: none;
-            cursor: pointer;
-            text-decoration: none;
-            border: 2px solid transparent;
-            transition: border 0.5s ease;
+        ::selection {
+            color: var(--color-bg-dark);
+            background: var(--color-accent-blue);
         }
-
-        .card-list .card-item:hover {
-            border: 2px solid #000;
+        /* Estilo de la barra de desplazamiento (scrollbar) sin efectos de brillo */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-
-        .card-list .card-item img {
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-light);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent-blue);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent-magenta);
+        }
+        /* Contenedor principal del chat */
+        .wrapper {
+            width: 370px;
+            background: var(--color-bg-light);
+            border-radius: 10px;
+            border: 1px solid var(--color-text-dark);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra más suave */
+            overflow: hidden;
+        }
+        .wrapper .title {
+            background: var(--color-bg-light);
+            color: var(--color-accent-blue);
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-accent-blue);
+            text-transform: uppercase;
+        }
+        /* Área de mensajes del chat */
+        .wrapper .form {
+            padding: 20px 15px;
+            min-height: 400px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--color-bg-dark);
+        }
+        .wrapper .form .inbox {
             width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-
-        .card-list span {
-            display: inline-block;
-            background: #ffffff;
-            margin-top: 32px;
-            padding: 8px 15px;
-            font-size: 0.75rem;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        .card-list .developer {
-            background-color: #ffffff;
-            color: #B22485;
-        }
-
-        .card-list .designer {
-            background-color: #ffffff;
-            color: #2968a8;
-        }
-
-        .card-list .editor {
-            background-color: #ffffff;
-            color: #205c20;
-        }
-
-        .card-item h3 {
-            color: #000;
-            font-size: 1.438rem;
-            margin-top: 28px;
-            font-weight: 600;
-        }
-
-        .card-item .arrow {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(-35deg);
+            align-items: flex-start;
+        }
+        .wrapper .form .user-inbox {
+            justify-content: flex-end;
+            margin: 15px 0;
+        }
+        .wrapper .form .inbox .icon {
             height: 40px;
             width: 40px;
-            color: #000;
-            border: 1px solid #000;
+            color: var(--color-bg-dark);
+            text-align: center;
+            line-height: 40px;
             border-radius: 50%;
-            margin-top: 40px;
-            transition: 0.2s ease;
+            font-size: 18px;
+            background: var(--color-accent-blue);
+            border: 1px solid var(--color-accent-blue);
+            box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Sombra de color sutil */
         }
-
-        .card-list .card-item:hover .arrow {
-            background: #000;
-            color: #fff;
+        .wrapper .form .inbox .msg-header {
+            max-width: 53%;
+            margin-left: 10px;
         }
-
-        @media (max-width: 1200px) {
-            .card-list .card-item {
-                padding: 15px;
-            }
+        .form .inbox .msg-header p {
+            color: var(--color-bg-dark);
+            background: var(--color-accent-blue);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 14px;
+            word-break: break-all;
+            box-shadow: 0 0 5px rgba(0, 188, 212, 0.5); /* Sombra de color sutil */
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-
-        @media screen and (max-width: 980px) {
-            .card-list {
-                margin: 0 auto;
-            }
+        .form .inbox .msg-header p:hover {
+            background: var(--color-accent-magenta);
+            box-shadow: 0 0 5px rgba(255, 0, 255, 0.5); /* Sombra de color sutil */
         }
-
-        ul {
-
+        .form .user-inbox .msg-header p {
+            color: var(--color-bg-dark);
+            background: var(--color-text-dark);
+            border-radius: 10px;
+            box-shadow: none;
+        }
+        /* Campo de entrada de texto */
+        .wrapper .typing-field {
             display: flex;
-            margin-right: 10px;
+            height: 60px;
+            width: 100%;
+            align-items: center;
+            justify-content: space-evenly;
+            background: var(--color-bg-light);
+            border-top: 1px solid var(--color-text-dark);
+            border-radius: 0 0 10px 10px;
         }
-
-        ul li a {
-
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 1.3rem;
-            color: #black;
-        }
-
-        ul li a:hover {
-            background: #570dd6ff;
-            border: 2px solid #fff;
-            padding: 17px 35px;
-        }
-
-        .miVideo {
+        .wrapper .typing-field .input-data {
+            height: 40px;
+            width: 335px;
             position: relative;
-            top: -30px
         }
-
-        .text-1,
-        .text-3 {
-            color: #fff;
-            /* Texto blanco */
+        .wrapper .typing-field .input-data input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: 1px solid var(--color-accent-blue);
+            padding: 0 80px 0 15px;
+            border-radius: 5px;
+            font-size: 15px;
+            background: var(--color-bg-dark);
+            color: var(--color-text-light);
+            transition: all 0.3s ease;
         }
-
-        .icons img {
-            width: 30px;
-            /* Ajusta el tamaño según tus preferencias */
-            height: auto;
-            /* Esto permite que la altura se ajuste automáticamente manteniendo la proporción original */
+        .typing-field .input-data input:focus {
+            border-color: var(--color-accent-magenta);
         }
-
-        .caja {
-            color: white;
-            /* Color de texto blanco */
+        .input-data input::placeholder {
+            color: #4a5568;
+            transition: all 0.3s ease;
         }
-
-        #redes,
-        #c {
-            color: black;
-            /* Color de texto blanco */
+        .input-data input:focus::placeholder {
+            color: var(--color-text-dark);
         }
-
-        .white-footer {
-            background-color: white;
+        /* Botón de envío */
+        .wrapper .typing-field .input-data button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            height: 30px;
+            width: 65px;
+            color: var(--color-bg-dark);
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            opacity: 0;
+            pointer-events: none;
+            border-radius: 5px;
+            background: var(--color-accent-blue);
+            border: 1px solid var(--color-accent-blue);
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
         }
-
-        .menu a {
-            color: black;
+        .wrapper .typing-field .input-data input:valid ~ button {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .typing-field .input-data button:hover {
+            background: var(--color-accent-magenta);
         }
     </style>
-
-
-
-    <nav class="navbar">
-        <div class="max-width navbar-container">
-            <div class="logo"><a href="#">Makers<span>IA.</span></a></div>
-
-            <ul class="menu">
-                <li><a href="iniciosesionadmi.php">Registro Administrador</a></li>
-                <li><a href="iniciodesesion.php">Inicia sesión</a></li>
-            </ul>
-
-
-
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">ChatBot</div>
+        <div class="form">
+            <div class="bot-inbox inbox">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="msg-header">
+                    <p>Hola, ¿cómo puedo ayudarte?</p>
+                </div>
             </div>
         </div>
-    </nav>
-
-
-
-    <section class="home" id="home">
-        <div class="max-width">
-            <div class="home-content">
-                <div class="text-1">Makers IA: Innovación con chatbot inteligente para tu negocio</div>
-
+        <div class="typing-field">
+            <div class="input-data">
+                <input id="data" type="text" placeholder="Escribe algo aquí.." required>
+                <button id="send-btn">Enviar</button>
             </div>
         </div>
-    </section>
-    <!-- home section start -->
-
-
-
-
-    <br><br><br><br><br><br><br><br>
-    <!-- contact section start -->
-    <section class="contact" id="contact">
-        <div class="max-width">
-            <h2 class="title">Contactanos</h2>
-            <div class="contact-content">
-                <footer class="white-footer">
-
-                    <div class="animated">
-                        <div class="wave" id="wave1"></div>
-                        <div class="wave" id="wave2"></div>
-
-                    </div>
-
-                    <div class="grupo-1">
-                        <div class="caja">
-                           
-                        </div>
-
-
-
-                        <div class="caja" id="rayita">
-                            <p class="foot" id="redes">REDES SOCIALES</p>
-
-                            <ul class="icons">
-                                <li>
-                                    <a href="https://www.tiktok.com/@innovation.system?_t=8hiY9wzp1Nu&_r=1"
-                                        class="tiktok">
-                                        <!-- Reemplaza "your_username" con tu nombre de usuario de TikTok -->
-                                        <img src="tik tok.png" alt="TikTok">
-                                        <!-- Asegúrate de tener un archivo de imagen para TikTok (tiktok.png) -->
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/system_inovattion/" class="instagram">
-                                        <img src="ig.png" alt="Instagram">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://twitter.com/Systeminovation" class="twitter">
-                                        <img src="twiter.png" alt="Twitter">
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-
-
-                        <div class="caja" id="cajacontac">
-                            <p class="foot" id="c">CONTACTO</p>
-                            <div class="contacto">
-                                <br>
-                                <ul class="icons">
-                                    <li>
-                                        <a href="https://w.app/0zsmzc"
-                                            class="whatsapp">
-                                            <img src="what.png" alt="WhatsApp">
-                                        </a>
-                                    </li>
-                                </ul><br>
-
-
-
-
-                </footer>
-                <!-- footer section start -->
-
-
-                <script src="script2.js"></script>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#send-btn").on("click", function() {
+                $value = $("#data").val();
+                $msg = '<div class="user-inbox inbox"><div class="msg-header"><p>' + $value + '</p></div></div>';
+                $(".form").append($msg);
+                $("#data").val('');
+                // iniciar el código ajax
+                $.ajax({
+                    url: 'message.php',
+                    type: 'POST',
+                    data: 'text=' + $value,
+                    success: function(result) {
+                        $replay = '<div class="bot-inbox inbox"><div class="icon"><i class="fas fa-user"></i></div><div class="msg-header"><p>' + result + '</p></div></div>';
+                        $(".form").append($replay);
+                        // cuando el chat baja, la barra de desplazamiento llega automáticamente al final
+                        $(".form").scrollTop($(".form")[0].scrollHeight);
+                    }
+                });
+            });
+        });
+    </script>
+  <a href="../menu.php" id="atras-btn">Atras</a>
+<style>
+  #atras-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    background-color: #1641a8ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }  #atras-btn:hover {
+    background-color: #1641a8ff;
+  }
 </body>
-
 </html>
