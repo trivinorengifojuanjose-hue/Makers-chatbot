@@ -1,0 +1,207 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono', monospace, 'Courier New', Courier, monospace;
+  background: linear-gradient(rgba(10, 25, 47, 1), rgba(10, 25, 47, 1));
+  height: 100vh;
+  color: #00ffff;
+}
+
+.formulario {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  background: rgba(15, 32, 64, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 0 20px #00ffff;
+  padding-bottom: 30px;
+}
+
+.formulario h1 {
+  text-align: center;
+  padding: 0 0 25px 0;
+  border-bottom: 2px solid #00ffff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00ffff;
+}
+
+.formulario form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+form .username {
+  position: relative;
+  border-bottom: 2px solid #00ffff;
+  margin: 35px 0;
+}
+
+#usuario,
+#Contrasena {
+  border: 0;
+  background: transparent;
+  color: #00ffff;
+  font-size: 16px;
+  padding: 8px 5px;
+  width: 100%;
+  outline: none;
+}
+
+.username input {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  background: none;
+  outline: none;
+  color: #00ffff;
+}
+
+.username label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #00cccc;
+  transform: translateY(-60%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.3s ease all;
+  letter-spacing: 1px;
+}
+
+.username span::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #00ffff;
+  transition: width 0.3s ease;
+}
+
+.username input:focus ~ label,
+.username input:not(:placeholder-shown) ~ label {
+  top: -10px;
+  font-size: 12px;
+  color: #00ffff;
+}
+
+.username input:focus ~ span::before {
+  width: 100%;
+}
+
+.recordar {
+  margin: -5px 0 20px 5px;
+  color: #00ffff;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+}
+
+.recordar:hover {
+  text-decoration: underline;
+  color: #00e6e6;
+}
+
+input[type="submit"] {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #00ffff;
+  background: transparent;
+  border-radius: 25px;
+  font-size: 18px;
+  color: #00ffff;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+input[type="submit"]:hover {
+  background-color: #00ffff;
+  color: #0a1930;
+  border-color: #00e6e6;
+  box-shadow: 0 0 20px #00e6e6;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: 270px;
+  padding: 20px 40px;
+  font-size: 1.3rem;
+  color: #00ffff;
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+.registrarse {
+  margin: 30px 0;
+  text-align: center;
+  font-size: 16px;
+  color: #00ffff;
+  letter-spacing: 1px;
+}
+
+.registrarse a {
+  color: #00e6e6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registrarse a:hover {
+  text-decoration: underline;
+  color: #00ffff;
+}
+
+#atras-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #005f73;
+  color: #00ffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00ffff;
+  transition: background-color 0.3s ease;
+}
+
+#atras-btn:hover {
+  background-color: #0a9396;
+}
+
+#atras-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(9, 132, 227);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}  #atras-btn:hover {
+    background-color: #1182de;
+  }
+
+
+
+
+    
+
+
